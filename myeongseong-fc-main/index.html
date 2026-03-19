@@ -7,9 +7,11 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0b2c5f">
+
 </head>
 <body>
 
+  <!-- 스플래시 -->
   <div id="splash">
     <div class="splash-inner">
       <h1 id="splash-title">명성FC</h1>
@@ -17,49 +19,54 @@
     </div>
   </div>
 
-  <div id="menu-screen" class="hidden">
-    <div class="menu-wrap">
-      <div class="menu-header">
-        <h2 class="menu-title">명성FC 출결관리</h2>
-        <div id="menu-verse" class="menu-verse" aria-label="오늘의 말씀"></div>
-      </div>
+  <!-- 메인 메뉴 -->
+<div id="menu-screen" class="hidden">
+  <div class="menu-wrap">
+    <div class="menu-header">
+      <h2 class="menu-title">명성FC 출결관리</h2>
+      <div id="menu-verse" class="menu-verse" aria-label="오늘의 말씀"></div>
+    </div>
 
-      <div class="menu-grid">
-        <button class="menu-card" onclick="goAttendance()">
-          <div class="menu-card-title">출석체크</div>
-          <div class="menu-card-sub">오늘 출석 체크</div>
-        </button>
+    <div class="menu-grid">
+      <button class="menu-card" onclick="goAttendance()">
+        <div class="menu-card-title">출석체크</div>
+        <div class="menu-card-sub">오늘 출석 체크</div>
+      </button>
 
-        <button class="menu-card" onclick="goManage()">
-          <div class="menu-card-title">출결관리</div>
-          <div class="menu-card-sub">기록 수정/삭제</div>
-        </button>
+      <button class="menu-card" onclick="goManage()">
+        <div class="menu-card-title">출결관리</div>
+        <div class="menu-card-sub">기록 수정/삭제</div>
+      </button>
 
-        <button class="menu-card" onclick="goMembers()">
-          <div class="menu-card-title">회원관리</div>
-          <div class="menu-card-sub">추가/수정/삭제</div>
-        </button>
+      <button class="menu-card" onclick="goMembers()">
+        <div class="menu-card-title">회원관리</div>
+        <div class="menu-card-sub">추가/수정/삭제</div>
+      </button>
 
-        <button class="menu-card" onclick="goStats()">
-          <div class="menu-card-title">통계</div>
-          <div class="menu-card-sub">연도별 요약</div>
-        </button>
-
-        <div class="menu-foot">
-          <span id="app-version">v-</span>
-          <button id="check-update" class="mini-link">업데이트 확인</button>
-          <button id="show-update-history" class="mini-link">업데이트 내역확인</button>
-        </div>
-
-        <div id="update-notice" class="update-notice hidden"></div>
-      </div>
+      <button class="menu-card" onclick="goStats()">
+        <div class="menu-card-title">통계</div>
+        <div class="menu-card-sub">연도별 요약</div>
+      </button>
+      <div class="menu-foot">
+  <span id="app-version">v-</span>
+  <button id="check-update" class="mini-link">업데이트 확인</button>
+  <button id="show-update-history" class="mini-link">업데이트 내역확인</button>
+</div>
+<div id="update-notice" class="update-notice hidden"></div>
     </div>
   </div>
+</div>
 
+
+
+
+  <!-- 출석체크 화면 -->
   <div id="attendance-screen" class="hidden">
     <div class="header">
       <button class="back-btn" onclick="showScreen('menu-screen')">←</button>
       <h2>출석체크</h2>
+
+      <!-- 예: 2026-01-30 출석 00명 -->
       <span id="today-count">-</span>
 
       <select id="round-select">
@@ -88,6 +95,7 @@
     </div>
   </div>
 
+  <!-- 출결관리 화면 -->
   <div id="manage-screen" class="hidden">
     <div class="header">
       <button class="back-btn" onclick="showScreen('menu-screen')">←</button>
@@ -98,6 +106,7 @@
     <div id="manage-list" style="padding:12px;"></div>
   </div>
 
+  <!-- 회원관리 화면 -->
   <div id="members-screen" class="hidden">
     <div class="header">
       <button class="back-btn" onclick="showScreen('menu-screen')">←</button>
@@ -124,6 +133,7 @@
     <div id="members-list" style="padding:12px;"></div>
   </div>
 
+  <!-- 통계 화면 -->
   <div id="stats-screen" class="hidden">
     <div class="header stats-header">
       <button class="back-btn" onclick="showScreen('menu-screen')">←</button>
@@ -181,8 +191,10 @@
               <tr>
                 <th rowspan="2">월</th>
                 <th rowspan="2">시행횟수</th>
+
                 <th colspan="4">총 출석수(누적)</th>
                 <th rowspan="2">평균출석(명)</th>
+
                 <th colspan="4">참여인원(1회이상)</th>
               </tr>
               <tr>
@@ -197,35 +209,17 @@
     </div>
   </div>
 
+  <!-- 스크립트 -->
   <script src="js/data.js"></script>
   <script src="js/attendance.js"></script>
   <script src="js/manage.js"></script>
   <script src="js/members.js"></script>
   <script src="js/stats.js"></script>
+  <script src="js/updates.js"></script>
   <script src="js/app.js"></script>
 
   <div id="toast" class="toast hidden">저장되었습니다 ✓</div>
 
-
-<div id="update-history-modal" class="modal hidden" aria-hidden="true">
-  <div class="modal-backdrop" onclick="closeUpdateHistoryModal()"></div>
-
-  <div class="modal-card modal-card-update" role="dialog" aria-modal="true" aria-labelledby="update-history-title">
-    <div class="modal-head">
-      <div>
-        <div class="modal-eyebrow">업데이트</div>
-        <h3 id="update-history-title" class="modal-title">업데이트 내역</h3>
-      </div>
-      <button class="modal-close" onclick="closeUpdateHistoryModal()" aria-label="닫기">✕</button>
-    </div>
-
-    <div id="update-history-body" class="modal-body"></div>
-
-    <div class="modal-foot">
-      <button class="btn-primary modal-ok-btn" onclick="closeUpdateHistoryModal()">닫기</button>
-    </div>
-  </div>
-</div>
 
 
 </body>

@@ -1,39 +1,64 @@
-const APP_VERSION = "1.0.0"; // 👈 여기만 올리면 캐시도 자동 교체됨
+const APP_VERSION = "1.0.2";
 const CACHE_NAME = `mfc-cache-v${APP_VERSION}`;
 
 const CORE_ASSETS = [
   "./",
   "./index.html",
+  "./manifest.json",
   "./css/style.css",
   "./js/data.js",
   "./js/attendance.js",
   "./js/manage.js",
   "./js/members.js",
   "./js/stats.js",
-  "./js/app.js"
+  "./js/app.js",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
 ];
 
-// 설치: 핵심 파일 캐시
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
   );
-  self.skipWaiting();
 });
 
-// 활성화: 이전 버전 캐시 삭제
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.map((k) => (k !== CACHE_NAME ? caches.delete(k) : null)))
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+          return null;
+        })
+      )
     )
   );
   self.clients.claim();
 });
 
-// 요청 처리: 캐시 우선, 없으면 네트워크
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") return;
+
+  const url = new URL(event.request.url);
+
+  // 버전/업데이트 정보는 항상 네트워크 우선
+  if (url.pathname.endsWith("/version.json") || url.pathname.endsWith("/updates.json")) {
+    event.respondWith(
+      fetch(event.request, { cache: "no-store" }).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request);
+    })
   );
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });

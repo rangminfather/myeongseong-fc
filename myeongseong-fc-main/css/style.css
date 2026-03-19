@@ -750,18 +750,6 @@ body {
   background: #0b1c2d; /* body와 톤 맞춤 */
 }
 
-
-
-/* 메인 화면 공통 배경 복구 */
-#attendance-screen,
-#manage-screen,
-#members-screen,
-#stats-screen {
-  min-height: 100vh;
-  box-sizing: border-box;
-  background: #0b1c2d;
-  color: #e8eef8;
-}
 .menu-wrap{
   max-width: 720px;
   margin: 0 auto;
@@ -780,7 +768,6 @@ body {
   font-size: 1.45rem;
   font-weight: 900;
   letter-spacing: 0.2px;
-  color: #e8eef8;   /* 추가 */
 }
 
 .menu-verse{
@@ -849,7 +836,6 @@ body {
   align-items: center;
   opacity: 0.85;
   font-size: 0.85rem;
-  color: #e8eef8;   /* 추가 */
 }
 
 .mini-link{
@@ -862,205 +848,16 @@ body {
 }
 .mini-link:active{ transform: scale(0.98); }
 
-.mini-link {
-  margin-left: 8px;
-}
-
-
-
 .update-notice {
   margin-top: 10px;
-  padding: 11px 13px;
-  border-radius: 12px;
-  background: #f7f9fc;
-  border: 1px solid #dfe6ef;
-  font-size: 13px;
-  line-height: 1.45;
-  color: #243447;
-}
-
-/* ===== 업데이트 내역 모달 ===== */
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
-
-.modal.hidden {
-  display: none;
-}
-
-.modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.32);
-  backdrop-filter: blur(2px);
-}
-
-.modal-card {
-  position: relative;
-  width: min(92vw, 560px);
-  max-height: 82vh;
-  overflow: hidden;
-  margin: 6vh auto 0;
-  background: #0f2237;  /* ← 변경 */
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 22px;
-  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
-}
-
-.modal-card-update {
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 18px 18px 14px;
-  border-bottom: 1px solid #eef2f6;
-}
-
-.modal-eyebrow {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.modal-title {
-  margin: 0;
-  font-size: 20px;
-  line-height: 1.25;
-  color: #e8eef8;
-}
-
-.modal-close {
-  border: 0;
-  background: #f6f8fb;
-  color: #475569;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.modal-close:active {
-  transform: scale(0.98);
-}
-
-.modal-body {
-  padding: 14px 18px 8px;
-  overflow-y: auto;
-}
-
-.modal-foot {
-  padding: 14px 18px 18px;
-  border-top: 1px solid #eef2f6;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.modal-ok-btn {
-  min-width: 84px;
-}
-
-/* 업데이트 항목 */
-.update-entry {
-  padding: 14px 0 16px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.update-entry:last-child {
-  border-bottom: 0;
-}
-
-.update-entry-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.update-version-chip {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  border: none;
-  font-size: 12px;
-  font-weight: 700;
-  color: rgba(232,238,248,0.6);
-}
-
-.update-date {
-  font-size: 12px;
-  color: #7b8794;
-  white-space: nowrap;
-}
-
-.update-entry-title {
-  margin: 0 0 8px;
-  font-size: 16px;
-  color: #ffffff;
-  font-weight: 800;
-}
-
-.update-change-list {
-  margin: 0;
-  padding-left: 18px;
-  color: #334155;
-}
-
-.update-change-list li {
-  margin: 4px 0;
-  line-height: 1.5;
-  color: #ffffff;
-  font-weight: 500;
-}
-
-/* 최신버전 강조하고 싶을때
-.update-entry:first-child .update-change-list li {
-  font-weight: 600;
-}
-
-*/ 
-
-
-.update-comment {
-  margin-top: 10px;
   padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(74, 120, 194, 0.18);   /* 은은한 블루 */
-  border: 1px solid rgba(74, 120, 194, 0.25);
+  border-radius: 10px;
+  background: #eef4ff;
+  border: 1px solid #c9dafc;
   font-size: 13px;
-  line-height: 1.5;
-  color: #e8eef8;  /* 흰색 텍스트 */
-  backdrop-filter: blur(6px);
+  color: #234;
 }
 
-@media (max-width: 480px) {
-  .modal-card {
-    width: min(94vw, 560px);
-    margin-top: 4vh;
-    max-height: 88vh;
-    border-radius: 18px;
-  }
-
-  .modal-title {
-    font-size: 18px;
-  }
-
-  .update-entry-title {
-    font-size: 15px;
-  }
-}
-
-#app-version {
-  color: #e8eef8;   /* 추가 */
+.mini-link {
+  margin-left: 8px;
 }
